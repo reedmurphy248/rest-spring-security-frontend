@@ -1,24 +1,30 @@
 import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import './App.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Login from "./components/login";
+import Signup from "./components/signup";
+import SecurePage from "./components/securepage";
+import ProtectedRoute from "./components/protectedRoute";
+import AdminRoute from "./components/adminRoute";
+import AdminPage from "./components/adminPage";
+import UserCart from "./components/userCart";
+import UpdateProduct from "./components/updateProduct";
+
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={Signup} />
+      <ProtectedRoute exact path="/secure" component={SecurePage} />
+      <ProtectedRoute exact path="/cart" component={UserCart} />
+      <AdminRoute exact path="/admin" component={AdminPage} />
+      <AdminRoute exact path="/update/:id" component={UpdateProduct} />
+    </Router>
   );
 }
 
