@@ -70,9 +70,10 @@ export default class Login extends Component {
         axios.post('http://localhost:8080/authenticate', reqBody)
             .then( response => {
 
+                const history = this.props.history;
 
                 AuthService.login(() => {
-                    this.props.history.push("/secure");
+                    history.push("/secure");
                 }, response.data.token, response.data.firstName, response.data.credentials);
 
                 this.setState({

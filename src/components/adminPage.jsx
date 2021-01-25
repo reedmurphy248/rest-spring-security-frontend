@@ -5,6 +5,8 @@ import { Jumbotron } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 export default function AdminPage(props) {
@@ -91,17 +93,22 @@ export default function AdminPage(props) {
                 <Form.Label>Product Price</Form.Label>
                 <Form.Control onChange={handleChange} value={productDetails.productUnitPrice} name="unitPrice" type="text" placeholder="Enter Product Description" />
             </Form.Group>
-            <Button onClick={submitProduct} variant="primary" type="submit">
-                Create Product
-            </Button>
-            <Button
-                onClick={() => {
-                            AuthService.logout(() => {
-                                props.history.push("/login");
-                            })
-                        }}>
-                        Logout
-            </Button>
+            <div>
+                <Button onClick={submitProduct} variant="primary" type="submit">
+                    Create Product
+                </Button>
+                <Button
+                    onClick={() => {
+                                AuthService.logout(() => {
+                                    props.history.push("/login");
+                                })
+                            }}>
+                            Logout
+                </Button>
+            </div>
+            <div>
+                <Button variant="warning"><Link to="/secure">View All Products</Link></Button>
+            </div>
             </Form>
         </Jumbotron>
     )

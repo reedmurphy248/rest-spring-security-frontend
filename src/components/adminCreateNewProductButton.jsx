@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 export default function AdminCreateProductButton(props) {
 
     return (
-        <Button variant="success"><Link to="/admin">Create New Product</Link></Button>
+        <Button variant="warning"><Link to="/admin">Create New Product</Link></Button>
     )
 
 }
