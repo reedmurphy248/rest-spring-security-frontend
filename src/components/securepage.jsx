@@ -13,6 +13,7 @@ import AdminUpdateProductButton from "./adminUpdateProductButton";
 import UserComponent from "./userComponent";
 import UserAddToCartButton from "./userAddToCartButton";
 import CartVisitComponent from "./cartVisitComponent";
+import AdminCreateProductButton from "./adminCreateNewProductButton";
 
 export default function SecurePage(props) {
 
@@ -111,6 +112,7 @@ export default function SecurePage(props) {
                         <UserComponent component={UserAddToCartButton} id={product.id}/>
                         <AdminComponent component={AdminDeleteProductButton} id={product.id} functionProp={getProductList}/>
                         <AdminComponent component={AdminUpdateProductButton} id={product.id} />
+                        <AdminComponent component={AdminCreateProductButton} />
                         </Card.Body>
                         </Card>
                     </div>
