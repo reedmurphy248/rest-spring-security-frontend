@@ -21,7 +21,7 @@ export default function AdminDeleteProductButton(props) {
     }
 
     return (
-        <Button variant="danger" onClick={deleteProduct}>Admin Button</Button>
+        <Button variant="danger" onClick={deleteProduct}>Delete Button</Button>
     )
 
 }

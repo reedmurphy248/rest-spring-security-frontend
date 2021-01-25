@@ -8,6 +8,8 @@ import { Button } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 export default function UserCart(props) {
 
     const [productList, updateUserCart] = useState({
@@ -60,6 +62,7 @@ export default function UserCart(props) {
                 Checkout
             </Button>
         </div>
+        <Button variant="warning"><Link to="/secure">Back to Products</Link></Button>
         { productList.products.map( product => {
             return (
                 <div key={product.id} id={product.id}>

@@ -17,6 +17,12 @@ export default function UpdateProduct(props) {
         productUnitPrice: 0
     });
 
+    const [placeholders, setPlaceholders] = useState({
+        productName: "",
+        productDescription: "",
+        productUnitPrice: 0
+    })
+
     const [successCondition, setSuccessCondition] = useState({
         success: false
     });
@@ -24,7 +30,23 @@ export default function UpdateProduct(props) {
     const params = props.match.params;
 
     useEffect(() => {
-        console.log(params.id);
+
+        const config = AuthService.getToken();
+
+        const productId = params.id
+
+        axios.get(`http://localhost:8080/admin/product/${productId}`, config)
+            .then(res => {
+                console.log(res.data);
+                console.log(res.data.unitPrice);
+                setPlaceholders({
+                    productName: res.data.name,
+                    productDescription: res.data.description,
+                    productUnitPrice: res.data.unitPrice
+                })
+            })
+            .catch(err => console.log(err));
+
     }, []);
 
     function handleChange(event) {
@@ -89,16 +111,16 @@ export default function UpdateProduct(props) {
             <h3>Update Product</h3>
             <Form>
             <Form.Group>
-                <Form.Label>Product Name</Form.Label>
-                <Form.Control onChange={handleChange} value={productDetails.productName} name="name" type="text" placeholder="Enter Product Name" />
+                <Form.Label>Product Name: {placeholders.productName} </Form.Label>
+                <Form.Control onChange={handleChange} value={productDetails.productName} name="name" type="text" placeholder="Change Product Name" />
             </Form.Group>
             <Form.Group>
-                <Form.Label>Product Description</Form.Label>
-                <Form.Control onChange={handleChange} value={productDetails.productDescription} name="description" type="text" placeholder="Enter Product Description" />
+                <Form.Label>Product Description: {placeholders.productDescription}</Form.Label>
+                <Form.Control onChange={handleChange} value={productDetails.productDescription} name="description" type="text" placeholder="Change Product Description" />
             </Form.Group>
             <Form.Group>
-                <Form.Label>Product Price</Form.Label>
-                <Form.Control onChange={handleChange} value={productDetails.productUnitPrice} name="unitPrice" type="text" placeholder="Enter Product Description" />
+                <Form.Label>Product Price: {placeholders.productUnitPrice}</Form.Label>
+                <Form.Control onChange={handleChange} name="unitPrice" type="text" placeholder="Change Product Unit Price" />
             </Form.Group>
             <Button onClick={updateProduct} variant="primary" type="submit">
                 Update Product

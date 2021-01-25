@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function AdminUpdateProductButton(props) {
 
-    const link = `/update/${props.id}`
+    const link = `/update/${props.id}`;
 
     return (
         <Button variant="success" id={props.id}><Link to={link}>Update Product</Link></Button>

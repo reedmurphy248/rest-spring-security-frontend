@@ -10,6 +10,9 @@ import { Card } from "react-bootstrap";
 import AdminComponent from "./adminComponent";
 import AdminDeleteProductButton from "./adminDeleteProductButton";
 import AdminUpdateProductButton from "./adminUpdateProductButton";
+import UserComponent from "./userComponent";
+import UserAddToCartButton from "./userAddToCartButton";
+import CartVisitComponent from "./cartVisitComponent";
 
 export default function SecurePage(props) {
 
@@ -19,7 +22,7 @@ export default function SecurePage(props) {
 
     const [productList, updateProducts] = useState({
         products: []
-    })
+    });
 
     useEffect(() => {
 
@@ -59,22 +62,23 @@ export default function SecurePage(props) {
 
     }
 
-    const addToCart = (event) => {
-        event.preventDefault();
+    // const addToCart = (event) => {
 
-        const productId = event.target.parentElement.parentElement.parentElement.id;
+    //     const productId = event.target.parentElement.parentElement.parentElement.id;
 
-        const config = AuthService.getToken();
+    //     const config = AuthService.getToken();
         
-        // Since it is post you need to add a blank JSON body even if the backend doesn't require an
-        axios.post(`http://localhost:8080/user/add-to-cart/${productId}`, '', config)
-            .catch(err => console.log(err));
+    //     // Since it is post you need to add a blank JSON body even if the backend doesn't require an
+    //     axios.post(`http://localhost:8080/user/add-to-cart/${productId}`, '', config)
+    //         .then(() => props.history.push("/cart"))
+    //         .catch(err => console.log(err));
 
-    }
+    // }
 
     return (
         <Jumbotron align="center" style={{ maxWidth: '50vw'}}>
             <h1>Welcome to the Secure Page, { sessionStorage.getItem('firstName') }</h1>
+            <UserComponent component={CartVisitComponent}/>
             <div>
                 <Button 
                     onClick={() => {
@@ -104,7 +108,7 @@ export default function SecurePage(props) {
                         <Card.Text>
                             Price: ${product.unitPrice}
                         </Card.Text>
-                        <Button onClick={addToCart}>Add To Cart</Button>
+                        <UserComponent component={UserAddToCartButton} id={product.id}/>
                         <AdminComponent component={AdminDeleteProductButton} id={product.id} functionProp={getProductList}/>
                         <AdminComponent component={AdminUpdateProductButton} id={product.id} />
                         </Card.Body>

@@ -71,8 +71,8 @@ export default class Signup extends Component {
             password: this.state.password
         }
         axios.post('http://localhost:8080/authenticate/new', reqBody)
-            .then( response => {
-                this.props.history.push("/login");
+            .then(() => {
+                this.props.history.push(`/post-signup/${reqBody.firstName}`);
             })
             .catch( err => {
                 console.log(err);
