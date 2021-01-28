@@ -14,6 +14,7 @@ import AdminPage from "./components/adminPage";
 import UserCart from "./components/userCart";
 import UpdateProduct from "./components/updateProduct";
 import PostSignup from "./components/postSignUp";
+import PostCheckout from "./components/postCheckout";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       <ProtectedRoute exact path="/cart" component={UserCart} />
       <AdminRoute exact path="/admin" component={AdminPage} />
       <AdminRoute exact path="/update/:id" component={UpdateProduct} />
+      <ProtectedRoute exact path ="/post-checkout" component={PostCheckout} />
     </Router>
   );
 }

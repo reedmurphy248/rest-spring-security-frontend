@@ -63,19 +63,6 @@ export default function SecurePage(props) {
 
     }
 
-    // const addToCart = (event) => {
-
-    //     const productId = event.target.parentElement.parentElement.parentElement.id;
-
-    //     const config = AuthService.getToken();
-        
-    //     // Since it is post you need to add a blank JSON body even if the backend doesn't require an
-    //     axios.post(`http://localhost:8080/user/add-to-cart/${productId}`, '', config)
-    //         .then(() => props.history.push("/cart"))
-    //         .catch(err => console.log(err));
-
-    // }
-
     return (
         <Jumbotron align="center" style={{ maxWidth: '50vw'}}>
             <h1>Welcome to the Secure Page, { sessionStorage.getItem('firstName') }</h1>

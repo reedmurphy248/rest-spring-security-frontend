@@ -112,15 +112,15 @@ export default function UpdateProduct(props) {
             <Form>
             <Form.Group>
                 <Form.Label>Product Name: {placeholders.productName} </Form.Label>
-                <Form.Control onChange={handleChange} value={productDetails.productName} name="name" type="text" placeholder="Change Product Name" />
+                <Form.Control onChange={handleChange} value={productDetails.productName} name="name" type="text" placeholder={placeholders.productName} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Product Description: {placeholders.productDescription}</Form.Label>
-                <Form.Control onChange={handleChange} value={productDetails.productDescription} name="description" type="text" placeholder="Change Product Description" />
+                <Form.Control onChange={handleChange} value={productDetails.productDescription} name="description" type="text" placeholder={placeholders.productDescription} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Product Price: {placeholders.productUnitPrice}</Form.Label>
-                <Form.Control onChange={handleChange} name="unitPrice" type="text" placeholder="Change Product Unit Price" />
+                <Form.Control onChange={handleChange} name="unitPrice" type="text" placeholder={placeholders.productUnitPrice} />
             </Form.Group>
             <Button onClick={updateProduct} variant="primary" type="submit">
                 Update Product

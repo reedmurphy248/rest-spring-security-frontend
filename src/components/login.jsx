@@ -125,7 +125,7 @@ export default class Login extends Component {
                         <Form.Control onChange={this.handlePasswordChange} value={this.state.password} name="password" type="password" placeholder="Password" />
                     </Form.Group>
                     <Button onClick={this.handleSubmit} variant="primary" type="submit">
-                        Login-TESTING
+                        Login
                     </Button>
                     <Button onClick={this.signUp}>Sign Up</Button>
                     </Form>

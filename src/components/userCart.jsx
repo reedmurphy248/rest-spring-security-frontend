@@ -18,6 +18,12 @@ export default function UserCart(props) {
 
     useEffect(() => {
 
+        getCart();
+
+    }, []);
+
+    function getCart() {
+
         const config = AuthService.getToken();
 
         axios.get('http://localhost:8080/user/getCart', config)
@@ -30,9 +36,34 @@ export default function UserCart(props) {
                 console.log(err);
             })
 
-    }, []);
+    }
+
+    function addToCart(event) {
+        const productId = event.target.parentElement.parentElement.parentElement.id;
+
+        const config = AuthService.getToken();
+        
+        // Since it is post you need to add a blank JSON body even if the backend doesn't require an
+        axios.post(`http://localhost:8080/user/add-to-cart/${productId}`, '', config)
+            .then(() => getCart())
+            .catch(err => console.log(err));
+    }
 
     function removeFromCart(event) {
+
+        event.preventDefault();
+
+        const productId = event.target.parentElement.parentElement.parentElement.id;
+
+        const config = AuthService.getToken();
+
+        axios.post(`http://localhost:8080/user/update-cart/${productId}`, "", config)
+            .then(() => getCart())
+            .catch(err => console.log(err));
+
+    }
+
+    function deleteFromCart(event) {
         event.preventDefault();
 
         const productId = event.target.parentElement.parentElement.parentElement.id;
@@ -40,9 +71,7 @@ export default function UserCart(props) {
         const config = AuthService.getToken();
 
         axios.post(`http://localhost:8080/user/remove-from-cart/${productId}`, '', config)
-            .then(res => updateUserCart({
-                products: res.data
-            }))
+            .then(() => getCart())
             .catch(err => console.log(err));
     }
 
@@ -50,15 +79,11 @@ export default function UserCart(props) {
         <Jumbotron align="center" style={{ maxWidth: '50vw'}}>
         <h1> {sessionStorage.getItem('firstName')}'s Cart</h1>
         <h2>Cart Price: ${ productList.products.reduce(function(accumulator, product) {
-            return accumulator + product.unitPrice;
+            return accumulator + product.unitPrice * product.quantity;
         }, 0).toFixed(2) } </h2>
         <div>
             <Button 
-                onClick={() => {
-                    AuthService.logout(() => {
-                        props.history.push("/login");
-                    })
-                }}>
+                onClick={() => props.history.push("/post-checkout")}>
                 Checkout
             </Button>
         </div>
@@ -73,7 +98,12 @@ export default function UserCart(props) {
                     <Card.Text>
                         Price: ${product.unitPrice}
                     </Card.Text>
-                    <Button onClick={removeFromCart}>Remove From Cart</Button>
+                    <Card.Text>
+                        Quantity: {product.quantity}
+                    </Card.Text>
+                    <Button onClick={addToCart}>+</Button>
+                    <Button onClick={removeFromCart} variant="warning">-</Button>
+                    <Button onClick={deleteFromCart} variant="danger">Remove From Cart</Button>
                     </Card.Body>
                     </Card>
                 </div>
